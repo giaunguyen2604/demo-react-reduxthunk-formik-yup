@@ -1,4 +1,4 @@
-import { useState} from 'react'
+import { useEffect, useState} from 'react'
 import { Container } from 'reactstrap'
 import ListTasks from './components/ListTasks'
 import FormAddEdit from './components/FormAddEdit'
@@ -6,7 +6,7 @@ import { useAppContext } from './contexts/appContext'
 import { listTodos } from './data'
 import './App.css';
 function App() {
-  const { initTask, isEditMode, updateIsEditMode } = useAppContext()
+  const { initTask, isEditMode, updateIsEditMode, idItemDelete } = useAppContext()
   const [listTasks, setListTasks] = useState(listTodos)
 
   const initialValues =
@@ -50,11 +50,17 @@ function App() {
     setListTasks(newListTodos)
   }
 
+  useEffect(() => {
+    if (idItemDelete) {
+      const newListTodos = [...listTasks].filter(todo => todo.id !== idItemDelete)
+      setListTasks(newListTodos)
+    }
+  }, [idItemDelete])
   return (
     <Container className="themed-container container-app">
       <h1 className="header-title">List Todos</h1>
       <FormAddEdit onSubmit={submitAddEdit} initialValues={initialValues}/>
-      <ListTasks listTasks={listTasks} updateStatus={changeStatus}/>
+      <ListTasks listTasks={listTasks} updateStatus={changeStatus} />
     </Container>
   );
 }
