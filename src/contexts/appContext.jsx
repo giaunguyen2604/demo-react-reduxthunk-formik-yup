@@ -7,7 +7,6 @@ const AppProvider = ({ children }) => {
 
   const [isEditMode, setIsEditMode] = useState(false)
   const [initTask, setInitTask] = useState({id:'', value: ''})
-  const [idItemDelete, setIdItemDelete] = useState('')
 
   const updateIsEditMode = (boolean) => {
     setIsEditMode(boolean)
@@ -17,17 +16,11 @@ const AppProvider = ({ children }) => {
     setInitTask(value)
   }
 
-  const updateIdItemDelete = (id) => {
-    setIdItemDelete(id)
-  }
-
   const providerValues = {
     isEditMode,
     updateIsEditMode,
     initTask,
-    updateInitTask,
-    idItemDelete,
-    updateIdItemDelete
+    updateInitTask
   }
 
   return (

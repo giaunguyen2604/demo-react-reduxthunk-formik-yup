@@ -17,8 +17,7 @@ const ListTasks = props => {
           key={index} 
           id={task?.id} 
           value={task?.value} 
-          isDone={task?.isDone}
-          updateStatus={changeStatus}/>
+          isDone={task?.isDone}/>
         })
       }
     </div>
@@ -26,8 +25,7 @@ const ListTasks = props => {
 }
 
 ListTasks.propTypes = {
-  listTasks : PropTypes.array,
-  updateStatus: PropTypes.func,
+  listTasks : PropTypes.array
 }
 
 export default ListTasks

@@ -4,12 +4,16 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import { AppProvider } from './contexts/appContext'
+import { Provider } from 'react-redux';
+import store from 'app/store';
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppProvider>
-      <App />
-    </AppProvider>
+    <Provider store={store} >
+      <AppProvider>
+        <App />
+      </AppProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

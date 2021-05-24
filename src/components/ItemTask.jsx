@@ -2,13 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Input, Col, Button, Row} from 'reactstrap'
 import { useAppContext } from 'contexts/appContext'
+import { useDispatch } from 'react-redux';
+import { removeTodo, updateStatus } from 'app/todoSlice'
 const ItemTask = props => {
-  const { value, isDone, updateStatus, id } = props
-  const { updateInitTask, updateIsEditMode, updateIdItemDelete} = useAppContext()
+  const dispatch = useDispatch();
+  const { value, isDone, id } = props
+  const { updateInitTask, updateIsEditMode} = useAppContext()
   
   const changeStatus = (e, id) => {
     const { checked } = e.target 
-    updateStatus(id, checked)
+    dispatch(updateStatus({id, checked}))
   }
 
   const editTodoItem = () => {
@@ -21,7 +24,8 @@ const ItemTask = props => {
   }
 
   const deleteTodoItem = () => {
-    updateIdItemDelete(id)
+    // updateIdItemDelete(id)
+    dispatch(removeTodo(id))
   }
 
   return (
@@ -40,8 +44,7 @@ const ItemTask = props => {
 
 ItemTask.propTypes = {
   value: PropTypes.string,
-  isDone: PropTypes.bool,
-  updateStatus: PropTypes.func
+  isDone: PropTypes.bool
 }
 
 export default ItemTask
