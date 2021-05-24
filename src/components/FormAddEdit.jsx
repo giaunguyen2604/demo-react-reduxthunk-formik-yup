@@ -20,6 +20,7 @@ function FormAddEdit(props) {
       initialValues={initialValues}
       onSubmit={onSubmit}
       validationSchema={validationSchema}
+      validateOnBlur={true}
     >
       {formikProps => {
         const { isSubmitting, setFieldValue} = formikProps;

@@ -55,7 +55,9 @@ function App() {
       const newListTodos = [...listTasks].filter(todo => todo.id !== idItemDelete)
       setListTasks(newListTodos)
     }
+    // eslint-disable-next-line
   }, [idItemDelete])
+
   return (
     <Container className="themed-container container-app">
       <h1 className="header-title">List Todos</h1>
