@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Input, Col, Button, Row} from 'reactstrap'
-import { useAppContext } from '../contexts/appContext'
+import { useAppContext } from 'contexts/appContext'
 const ItemTask = props => {
   const { value, isDone, updateStatus, id } = props
   const { updateInitTask, updateIsEditMode, updateIdItemDelete} = useAppContext()

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ItemTask from './ItemTask'
+import ItemTask from 'components/ItemTask'
 
 const ListTasks = props => {
   const { listTasks, updateStatus } = props

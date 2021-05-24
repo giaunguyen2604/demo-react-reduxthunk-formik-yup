@@ -3,8 +3,8 @@ import { FastField, Form, Formik } from 'formik';
 import PropTypes from 'prop-types'
 import { Button, FormGroup, Spinner } from 'reactstrap';
 import * as Yup from 'yup';
-import InputCustom from './InputCustom'
-import { useAppContext } from '../contexts/appContext'
+import InputCustom from 'components/InputCustom'
+import { useAppContext } from 'contexts/appContext'
 
 function FormAddEdit(props) {
   const { isEditMode, updateIsEditMode } = useAppContext()

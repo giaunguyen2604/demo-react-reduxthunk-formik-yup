@@ -1,8 +1,8 @@
 import { useEffect, useState} from 'react'
 import { Container } from 'reactstrap'
-import ListTasks from './components/ListTasks'
-import FormAddEdit from './components/FormAddEdit'
-import { useAppContext } from './contexts/appContext' 
+import ListTasks from 'components/ListTasks'
+import FormAddEdit from 'components/FormAddEdit'
+import { useAppContext } from 'contexts/appContext' 
 import { listTodos } from './data'
 import './App.css';
 function App() {
