@@ -1,38 +1,37 @@
-.App {
+/* @import'~@fortawesome/fontawesome-free/webfonts'; */
+@import '~@fortawesome/fontawesome-free/css/fontawesome';
+@import '~@fortawesome/fontawesome-free/css/regular';
+@import '~@fortawesome/fontawesome-free/css/solid';
+@import '~@fortawesome/fontawesome-free/css/brands';
+.container-app {
+  width: 700px;
+  margin: 0 auto;
+}
+
+.header-title {
   text-align: center;
+  padding-bottom: 10px;
+}
+.ml-btn {
+  margin-left: 5px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.value-task {
+  margin-left: 15px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.item-task {
+  margin-top: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.list-tasks {
+
 }
 
-.App-link {
-  color: #61dafb;
+.btn-control-task {
+  text-align: right;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn-add-edit {
+  margin-top: 10px;
 }

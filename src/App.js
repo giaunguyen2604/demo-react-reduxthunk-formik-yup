@@ -1,24 +1,51 @@
-import logo from './logo.svg';
+import { useState} from 'react'
+import { Container } from 'reactstrap'
+import ListTasks from './components/ListTasks'
+import FormAddEdit from './components/FormAddEdit'
+import { listTodos } from './data'
 import './App.css';
 
 function App() {
+
+  const [listTasks, setListTasks] = useState(listTodos)
+
+  const initialValues =
+  {
+    task: ''
+  }
+
+  const submitAddEdit = (values, actions) => {
+    setTimeout(() => {
+      const newListTodos = [...listTasks]
+      newListTodos.push({
+        id: Date.now(),
+        value: values.task,
+        isDone: false
+      })
+      setListTasks(newListTodos)
+      actions.setSubmitting(false);
+      actions.resetForm({
+        values: {
+          task: ''
+        }
+      })
+    }, 500)
+  }
+
+  const changeStatus = (id, checked) => {
+    const newListTodos = [...listTasks]
+    const index = newListTodos.findIndex(el => el.id === id)
+    if (index === -1) return;
+    newListTodos[index].isDone = checked
+    setListTasks(newListTodos)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className="themed-container container-app">
+      <h1 className="header-title">List Todos</h1>
+      <FormAddEdit isAdd={true} onSubmit={submitAddEdit} initialValues={initialValues}/>
+      <ListTasks listTasks={listTasks} updateStatus={changeStatus}/>
+    </Container>
   );
 }
 
