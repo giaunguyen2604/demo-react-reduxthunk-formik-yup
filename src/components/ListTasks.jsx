@@ -4,7 +4,7 @@ import ItemTask from './ItemTask'
 
 const ListTasks = props => {
   const { listTasks, updateStatus } = props
-  
+
   const changeStatus = (id, checked) => {
     updateStatus(id,checked)
   }
@@ -27,7 +27,7 @@ const ListTasks = props => {
 
 ListTasks.propTypes = {
   listTasks : PropTypes.array,
-  updateStatus: PropTypes.func
+  updateStatus: PropTypes.func,
 }
 
 export default ListTasks

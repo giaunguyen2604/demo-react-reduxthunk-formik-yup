@@ -4,21 +4,31 @@ import PropTypes from 'prop-types'
 import { Button, FormGroup, Spinner } from 'reactstrap';
 import * as Yup from 'yup';
 import InputCustom from './InputCustom'
+import { useAppContext } from '../contexts/appContext'
 
 function FormAddEdit(props) {
-  const { initialValues, isAdd, onSubmit } = props
+  const { isEditMode, updateIsEditMode } = useAppContext()
+  const { initialValues, onSubmit } = props
+
   const validationSchema = Yup.object().shape({
     task: Yup.string().required('This field is required.'),
   });
 
   return (
     <Formik
+      enableReinitialize
       initialValues={initialValues}
       onSubmit={onSubmit}
       validationSchema={validationSchema}
     >
       {formikProps => {
-        const { isSubmitting } = formikProps;
+        const { isSubmitting, setFieldValue} = formikProps;
+
+        const cancelEdit = () => {
+          setFieldValue('task','')
+          updateIsEditMode(false)
+        }
+
         return (
           <Form>
             <FastField
@@ -28,10 +38,16 @@ function FormAddEdit(props) {
               placeholder="Write your task"
             />
             <FormGroup >
-              <Button type="submit" color={isAdd ? 'primary' : 'success'} className="btn-add-edit">
-                {isSubmitting ? <Spinner size="sm"/> : <i className="fa fa-plus fa-sm"></i>}
-                {isAdd ? ' Add task' : ' Update your task'}
+              <Button type="submit" color={isEditMode ? 'primary' : 'success'} className="btn-add-edit">
+                {isSubmitting ? <Spinner size="sm" /> : <i className="fas fa-save" />}
+                {" Save"}
               </Button>
+              {isEditMode &&
+                <Button type="button" color='info' className="btn-add-edit"
+                onClick={cancelEdit}>
+                  Cancel
+                </Button>
+              }
             </FormGroup>
           </Form>)
       }}
@@ -39,7 +55,6 @@ function FormAddEdit(props) {
 }
 
 FormAddEdit.propTypes = {
-  isAdd: PropTypes.bool,
   onSubmit: PropTypes.func,
   initialValues: PropTypes.object
 }

@@ -20,7 +20,7 @@ const InputCustom = (props) => {
       <Input
         id={name}
         {...field}
-
+        
         type={type}
         disabled={disabled}
         placeholder={placeholder}
