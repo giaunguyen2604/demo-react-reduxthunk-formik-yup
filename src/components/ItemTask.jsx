@@ -4,10 +4,11 @@ import { Input, Col, Button, Row} from 'reactstrap'
 import { useAppContext } from 'contexts/appContext'
 import { useDispatch } from 'react-redux';
 import { removeTodo, updateStatus } from 'app/todoSlice'
+
 const ItemTask = props => {
   const dispatch = useDispatch();
   const { value, isDone, id } = props
-  const { updateInitTask, updateIsEditMode} = useAppContext()
+  const { updateInitTask, updateIsEditMode } = useAppContext()
   
   const changeStatus = (e, id) => {
     const { checked } = e.target 

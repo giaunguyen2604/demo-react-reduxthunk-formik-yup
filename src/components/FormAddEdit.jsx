@@ -21,13 +21,16 @@ function FormAddEdit(props) {
       onSubmit={onSubmit}
       validationSchema={validationSchema}
       validateOnBlur={true}
+      validateOnChange={true}
+      validateOnMount={false}
     >
       {formikProps => {
-        const { isSubmitting, setFieldValue} = formikProps;
+        const { isSubmitting, setFieldValue, setFieldTouched } = formikProps;
 
         const cancelEdit = () => {
-          setFieldValue('task','')
+          setFieldValue('task', '')
           updateIsEditMode(false)
+          setFieldTouched('task', false, false)
         }
 
         return (
@@ -37,6 +40,7 @@ function FormAddEdit(props) {
               label="Task"
               component={InputCustom}
               placeholder="Write your task"
+              validate={validationSchema}
             />
             <FormGroup >
               <Button type="submit" color={isEditMode ? 'primary' : 'success'} className="btn-add-edit">
@@ -45,7 +49,7 @@ function FormAddEdit(props) {
               </Button>
               {isEditMode &&
                 <Button type="button" color='info' className="btn-add-edit"
-                onClick={cancelEdit}>
+                  onClick={cancelEdit}>
                   Cancel
                 </Button>
               }
