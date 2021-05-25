@@ -1,0 +1,5 @@
+@baseUTL = http://localhost:3000
+
+# todos
+  # @name getAllTodos
+  GET {{baseUTL}}/todos
