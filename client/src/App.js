@@ -4,13 +4,12 @@ import ListTasks from 'components/ListTasks'
 import FormAddEdit from 'components/FormAddEdit'
 import { useAppContext } from 'contexts/appContext'
 import { useSelector, useDispatch } from 'react-redux';
-import { addTodo, updateTodo } from './app/todoSlice'
-import todoAPI from 'api/todoAPI'
+import { addTodo, updateTodo, getTodos } from './app/todoSlice'
 import './App.css';
 
 function App() {
   const { initTask, isEditMode, updateIsEditMode } = useAppContext()
-  const listTodos = useSelector(state => state.todos)
+  const listTodos = useSelector(state => state.todos?.data)
   const dispatch = useDispatch();
   const initialValues =
   {
@@ -42,10 +41,8 @@ function App() {
   }
 
   React.useEffect( () => {
-    async function fetchData() {
-      const response = await todoAPI.getAll()
-    }
-    fetchData()
+    dispatch(getTodos())
+    // eslint-disable-next-line
   },[])
 
   return (
