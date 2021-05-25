@@ -1,14 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Input, Col, Button, Row} from 'reactstrap'
-import { useAppContext } from 'contexts/appContext'
 import { useDispatch } from 'react-redux';
-import { removeTodo, updateStatus } from 'app/todoSlice'
+import { removeTodo, updateStatus, updateInitTask, updateIsEditMode } from 'app/todoSlice'
 
 const ItemTask = props => {
   const dispatch = useDispatch();
   const { value, isDone, id } = props
-  const { updateInitTask, updateIsEditMode } = useAppContext()
   
   const changeStatus = (e, id) => {
     const { checked } = e.target 
@@ -16,9 +14,9 @@ const ItemTask = props => {
   }
 
   const editTodoItem = () => {
-    updateInitTask({id, value})
-    updateIsEditMode(true)
-
+    dispatch(updateInitTask({id, task: value}))
+    dispatch(updateIsEditMode(true))
+    
     //focus input
     const elInput = document.getElementById('task')
     if (elInput) elInput.focus()

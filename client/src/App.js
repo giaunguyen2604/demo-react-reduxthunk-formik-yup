@@ -2,21 +2,15 @@ import React from 'react'
 import { Container } from 'reactstrap'
 import ListTasks from 'components/ListTasks'
 import FormAddEdit from 'components/FormAddEdit'
-import { useAppContext } from 'contexts/appContext'
 import { useSelector, useDispatch } from 'react-redux';
-import { addTodo, updateTodo, getTodos } from './app/todoSlice'
+import { addTodo, updateTodo, getTodos, updateIsEditMode } from './app/todoSlice'
 import './App.css';
 
 function App() {
-  const { initTask, isEditMode, updateIsEditMode } = useAppContext()
+  const isEditMode = useSelector(state => state.todos.isEditMode)
   const listTodos = useSelector(state => state.todos?.data)
   const dispatch = useDispatch();
-  const initialValues =
-  {
-    id: initTask.id,
-    task: initTask.value
-  }
-
+ 
   const submitAddEdit = (values, actions) => {
     const { task, id } = values
     setTimeout(() => {
@@ -29,7 +23,7 @@ function App() {
         dispatch(addTodo(payload))
       } else {
         dispatch(updateTodo({id, value: task}))
-        updateIsEditMode(false)
+        dispatch(updateIsEditMode(false))
       }
       actions.setSubmitting(false);
       actions.resetForm({
@@ -48,7 +42,7 @@ function App() {
   return (
     <Container className="themed-container container-app">
       <h1 className="header-title">List Todos</h1>
-      <FormAddEdit onSubmit={submitAddEdit} initialValues={initialValues} />
+      <FormAddEdit onSubmit={submitAddEdit}/>
       <ListTasks listTasks={listTodos}/>
     </Container>
   );

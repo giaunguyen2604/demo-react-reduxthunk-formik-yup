@@ -4,12 +4,14 @@ import PropTypes from 'prop-types'
 import { Button, FormGroup, Spinner } from 'reactstrap';
 import * as Yup from 'yup';
 import InputCustom from 'components/InputCustom'
-import { useAppContext } from 'contexts/appContext'
+import { useDispatch, useSelector } from 'react-redux';
+import { updateIsEditMode } from 'app/todoSlice';
 
 function FormAddEdit(props) {
-  const { isEditMode, updateIsEditMode } = useAppContext()
-  const { initialValues, onSubmit } = props
-
+  const isEditMode = useSelector(state => state.todos.isEditMode)
+  const initialValues = useSelector(state => state.todos.initTask)
+  const { onSubmit } = props
+  const dispatch = useDispatch()
   const validationSchema = Yup.object().shape({
     task: Yup.string().required('This field is required.'),
   });
@@ -29,7 +31,7 @@ function FormAddEdit(props) {
 
         const cancelEdit = () => {
           setFieldValue('task', '')
-          updateIsEditMode(false)
+          dispatch(updateIsEditMode(false))
           setFieldTouched('task', false, false)
         }
 
@@ -60,8 +62,7 @@ function FormAddEdit(props) {
 }
 
 FormAddEdit.propTypes = {
-  onSubmit: PropTypes.func,
-  initialValues: PropTypes.object
+  onSubmit: PropTypes.func
 }
 
 FormAddEdit.defaultProps = {

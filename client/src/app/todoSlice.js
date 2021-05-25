@@ -11,7 +11,9 @@ const todo = createSlice({
   name: 'todos',
   initialState: {
     data: [],
-    loading: false
+    loading: false,
+    isEditMode: false,
+    initTask: { id:'', task: ''}
   },
   reducers: {
     addTodo: (state, action) => {
@@ -34,6 +36,14 @@ const todo = createSlice({
       const index = state.data.findIndex(el => el.id === id)
       if (index === -1) return;
       state.data[index].isDone = checked
+    },
+    updateInitTask: (state, action) => {
+      const { id, task } = action.payload
+      state.initTask = {id, task}
+    },
+    updateIsEditMode: (state, action) => {
+      const isEditMode  = action.payload
+      state.isEditMode = isEditMode
     }
   },
   extraReducers:{
@@ -45,12 +55,11 @@ const todo = createSlice({
     },
     [getTodos.fulfilled]: (state, action) => {
       state.loading = false
-      console.log(action)
       state.data = action.payload
     }
   }
 });
 
 const { reducer, actions } = todo;
-export const { addTodo, removeTodo, updateTodo, updateStatus } = actions;
+export const { addTodo, removeTodo, updateTodo, updateStatus, updateInitTask, updateIsEditMode } = actions;
 export default reducer;
