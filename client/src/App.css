@@ -1,0 +1,38 @@
+/* @import'~@fortawesome/fontawesome-free/webfonts'; */
+@import '~@fortawesome/fontawesome-free/css/fontawesome';
+@import '~@fortawesome/fontawesome-free/css/regular';
+@import '~@fortawesome/fontawesome-free/css/solid';
+@import '~@fortawesome/fontawesome-free/css/brands';
+.container-app {
+  width: 700px;
+  margin: 0 auto;
+}
+
+.header-title {
+  text-align: center;
+  padding-bottom: 10px;
+}
+.ml-btn {
+  margin-left: 5px;
+}
+
+.value-task {
+  margin-left: 15px;
+}
+
+.item-task {
+  margin-top: 10px;
+}
+
+.list-tasks {
+
+}
+
+.btn-control-task {
+  text-align: right;
+}
+
+.btn-add-edit {
+  margin-top: 10px;
+  margin-right: 10px;
+}
