@@ -1,6 +1,6 @@
 import axiosClient from 'api/axiosClient'
 
-const domain = 'http://localhost:3000'
+const domain = 'https://gtn-todoapis.herokuapp.com'
 const baseURL = `${domain}/todos`
 
 class TodoAPI {
