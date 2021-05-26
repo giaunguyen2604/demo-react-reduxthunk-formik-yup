@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "yarn json-server db.json"
+    "start": "node main.js"
   },
   "dependencies": {
     "json-server": "^0.16.3"
