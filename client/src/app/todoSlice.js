@@ -2,10 +2,29 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import todoAPI from 'api/todoAPI'
 
 export const getTodos = createAsyncThunk("todos/getAll", async(params, thunkAPI) => {
-  //thunkAPI.dispatch(...)
   const dataTodos = await todoAPI.getAll()
   return dataTodos
 })
+
+export const addTodoAsync = createAsyncThunk("todos/addTodo", async(params, thunkAPI) => {
+  const data = await todoAPI.addTodo(params)
+  return data
+  
+})
+
+export const updateTodoAsync = createAsyncThunk("todos/updateTodo", async(params, thunkAPI) => {
+  const data = await todoAPI.updateTodo(params)
+  return data
+})
+
+export const deleteTodoAsync = createAsyncThunk("todos/deleteTodo", async(params, thunkAPI) => {
+  await todoAPI.deleteTodo(params)
+  return params
+})
+
+// export const updateStatus = createAsyncThunk("todos/updateStatusTodo", async(params, thunkAPI) => {
+
+// })
 
 const todo = createSlice({
   name: 'todos',
@@ -16,27 +35,6 @@ const todo = createSlice({
     initTask: { id:'', task: ''}
   },
   reducers: {
-    addTodo: (state, action) => {
-      state.data.push(action.payload);
-    },
-    removeTodo: (state, action) => {
-      const removeTodoId = action.payload;
-      return {...state, data: state.data.filter(todo => todo.id !== removeTodoId)};
-    },
-    updateTodo: (state, action) => {
-      const newTodo = action.payload;
-      const todoIndex = state.data.findIndex(todo => todo.id === newTodo.id);
-
-      if (todoIndex >= 0) {
-        state.data[todoIndex] = newTodo;
-      }
-    },
-    updateStatus: (state, action) => {
-      const { id, checked } = action.payload
-      const index = state.data.findIndex(el => el.id === id)
-      if (index === -1) return;
-      state.data[index].isDone = checked
-    },
     updateInitTask: (state, action) => {
       const { id, task } = action.payload
       state.initTask = {id, task}
@@ -56,6 +54,22 @@ const todo = createSlice({
     [getTodos.fulfilled]: (state, action) => {
       state.loading = false
       state.data = action.payload
+    },
+    [addTodoAsync.fulfilled]: (state, action) => {
+      state.data.push(action.payload);
+    },
+    [updateTodoAsync.fulfilled]: (state, action) => {
+      const newTodo = action.payload;
+      const todoIndex = state.data.findIndex(todo => todo.id === newTodo.id);
+
+      if (todoIndex >= 0) {
+        state.data[todoIndex] = newTodo;
+      }
+    },
+    [deleteTodoAsync.fulfilled]: (state, action) => {
+      const removeTodoId = action.payload.id;
+      const filterData = state.data.filter(todo => todo.id !== parseInt(removeTodoId))
+      state.data = filterData;
     }
   }
 });

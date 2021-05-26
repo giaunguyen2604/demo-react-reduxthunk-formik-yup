@@ -3,7 +3,7 @@ import { Container } from 'reactstrap'
 import ListTasks from 'components/ListTasks'
 import FormAddEdit from 'components/FormAddEdit'
 import { useSelector, useDispatch } from 'react-redux';
-import { addTodo, updateTodo, getTodos, updateIsEditMode } from './app/todoSlice'
+import { getTodos, updateIsEditMode, addTodoAsync, updateTodoAsync} from './app/todoSlice'
 import './App.css';
 
 function App() {
@@ -20,10 +20,10 @@ function App() {
           value: values.task,
           isDone: false
         }
-        dispatch(addTodo(payload))
+        dispatch(addTodoAsync(payload))
       } else {
-        dispatch(updateTodo({id, value: task}))
         dispatch(updateIsEditMode(false))
+        dispatch(updateTodoAsync({id, value: task}))
       }
       actions.setSubmitting(false);
       actions.resetForm({
