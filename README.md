@@ -11,7 +11,7 @@
 - Using axios, create axios client to call API
 
 **Server side**
-- Build a simple json-server to reponse sample data
+- Build a simple json-server to response sample data
 
 **Deployment**
 - Client: surge.sh (http://gtn-todos-app.surge.sh)
